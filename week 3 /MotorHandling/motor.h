@@ -1,23 +1,18 @@
-#include "motor.h"
+#ifndef MOTOR_H
+#define MOTOR_H
+#include "Arduino.h"
 
-Motor::Motor(uint8_t pin1, uint8_t pin2) {
-  pin_1 = pin1;
-  pin_2 = pin2;
-  pinMode(pin_1, OUTPUT);
-  pinMode(pin_2, OUTPUT);
-}
+class Motor {
+  public:
+    Motor(uint8_t pin1, uint8_t pin2);
 
-void Motor::forward(uint8_t pwm) {
-  analogWrite(_pin1, pwm);
-  analogWrite(_pin2, 0);
-}
+    void forward(uint8_t pwm);   
+    void backward(uint8_t pwm);
+    void stop();
 
-void Motor::backward(uint8_t pwm) {
-  analogWrite(_pin1, 0);
-  analogWrite(_pin2, pwm);
-}
+  private:
+    uint8_t pin1_;
+    uint8_t pin2_;
+};
 
-void Motor::stop() {
-  analogWrite(_pin1, 0);
-  analogWrite(_pin2, 0);
-}
+#endif
